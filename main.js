@@ -1,30 +1,34 @@
-function addTarefa(textoInput){
+
 const tarefa = document.querySelector('.novaTarefa');
 const btnTarefa = document.querySelector('.btnAddTarefa');
 const listaTarefas = document.querySelector('.terefas');
-const li = criaLi();
 
-if(!tarefa.value) return;
-li.innerHTML = tarefa.value;
-listaTarefas.appendChild(li);
-criaBotaoApagar(li);
-limpaInput(tarefa);
-salvarTarefas();
+
+tarefa.addEventListener('keypress', function(e) {
+    if (e.keyCode === 13) {
+      if (!tarefa.value) return;
+      addTarefa(tarefa.value);
+    }
+  });
+
+function addTarefa(textoInput){
+    const li = criaLi();
+    li.innerHTML = textoInput;
+    listaTarefas.appendChild(li);
+    criaBotaoApagar(li);
+    limpaInput();
+    salvarTarefas();
+    }
+
+    btnTarefa.addEventListener('click', function() {
+        if (!tarefa.value) return;
+        addTarefa(tarefa.value);
+      });
+
+function limpaInput(){
+    tarefa.value = '';
+    tarefa.focus();
 }
-
-function limpaInput(textoInput){
-    textoInput.value = '';
-    textoInput.focus();
-}
-
-// function criaTarefa(textoInput) {
-//     const li = criaLi();
-//     li.innerText = textoInput;
-//     listaTarefas.appendChild(li);
-//     limpaInput();
-//     criaBotaoApagar(li);
-//     salvarTarefas();
-//   }
 
 function criaLi(){
     const li = document.createElement('li');
